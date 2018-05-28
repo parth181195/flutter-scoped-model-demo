@@ -35,7 +35,7 @@ class TodoHome extends StatelessWidget {
                 onTap: (){},
                 child: new ListTile(
                   trailing: new IconButton(
-                    icon: new Icon(Icons.delete),
+                    icon: new Icon(Icons.check),
                     onPressed: (){
                       model.deleteTask(index);
                     }
@@ -89,7 +89,7 @@ class AddItemDialogState extends State<AddItemDialog> {
               controller: controller,
               autofocus: true,
               decoration: new InputDecoration(
-                labelText: 'Item name', hintText: 'eg. Red Apples'),
+                labelText: 'Task name', hintText: 'eg. Buy Red Apples'),
             ),
           )
         ],
