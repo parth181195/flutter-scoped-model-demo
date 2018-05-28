@@ -49,6 +49,7 @@ class TodoHome extends StatelessWidget {
       ),
       floatingActionButton: ScopedModelDescendant<MainModel>(
         builder: (context,child,model,) => FloatingActionButton(
+          child: new Icon(Icons.add),
           onPressed: () {
             openAddItemDialogue(context);
           },
