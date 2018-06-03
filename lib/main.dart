@@ -32,15 +32,20 @@ class TodoHome extends StatelessWidget {
             itemCount: model.taskLength,
             itemBuilder: (context,index)  {
               return new InkWell(
-                onTap: (){},
+                onTap: (){
+                      model.handleTask(index);
+                },
                 child: new ListTile(
                   trailing: new IconButton(
-                    icon: new Icon(Icons.check),
+                    color: Colors.green,
+                    icon: model.task[index].isDone ?  new Icon(Icons.check) : new Icon(Icons.check_box_outline_blank),
                     onPressed: (){
-                      model.deleteTask(index);
+                      model.handleTask(index);
                     }
                   ),
-                  title: new Text(model.task[index].name),
+                  title: new Text(model.task[index].name,style: new TextStyle(
+                    decoration: model.task[index].isDone ? new TextDecoration.combine(<TextDecoration>[TextDecoration.lineThrough]): null
+                  )),
                 ),
               );
             }
@@ -57,14 +62,6 @@ class TodoHome extends StatelessWidget {
     );
   }
 }
-
-var counterText = (int counter) => ' ${counter.toString()}';
-
-var buildCounterText = () => ScopedModelDescendant<MainModel>(
-  builder: (context, child, model) => Text(
-    'length: ' + counterText(model.task.length),
-  ),
-);
 
 openAddItemDialogue(BuildContext context) {
   showDialog(context: context, builder: (context) => new AddItemDialog());

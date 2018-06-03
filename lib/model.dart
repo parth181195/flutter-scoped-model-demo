@@ -2,12 +2,12 @@ import 'package:scoped_model/scoped_model.dart';
 
 class Task {
   final String name;
-  final bool isDone;
+  bool isDone;
   Task(this.name, this.isDone);
 }
 
 class ToDoModel extends Model {
-  List<Task> _toDoList = [];
+  static List<Task> _toDoList = [];
   List get task => _toDoList;
 
   int get taskLength => _toDoList.length;
@@ -18,10 +18,17 @@ class ToDoModel extends Model {
     notifyListeners();
   }
 
-  void deleteTask(int index){
-    _toDoList.removeAt(index);
+  void handleTask(int index){
+    if(_toDoList[index].isDone == true){
+    _toDoList[index].isDone = false;
+    _toDoList.insert(0, _toDoList.removeAt(index));
+    notifyListeners();
+    } else {
+    _toDoList[index].isDone = true;
+    _toDoList.add(_toDoList.removeAt(index));
     print(_toDoList);
     notifyListeners();
+    }
   }
 }
 
